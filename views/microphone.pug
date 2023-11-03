@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} or Lab10
+
+  - var results = [{name: "TurtleBeach", cost: 99.99, easyUse: "Yes"}]
+  
+  div(class=container-fluid)
+  div(class=row)
+  
+  each item in results
+    div(class=col-sm-2) Item: #{item.name}
+    div(class=col-sm-2) Cost: #{item.cost}
+    div(class=col-sm-2) Easy Use: #{item.easyUse}

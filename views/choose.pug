@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} or Lab10
+
+  - var image_names = ["shure.jpg", "turtleBeach.jpg", "yeti.jpg", "e614.jpg", "RODE.jpg"]
+  - for(let i = 0; i < 3; i++) {
+      - var myNum = Math.floor(Math.random()*5)
+      - var imgLoc = 'images/' + image_names[myNum]
+      - var imgName = image_names[myNum]
+      //- img(src="images/#{imgName}.jpg", alt=`#{image_names[myNum]}`, height=300, width=300)
+      img(src=imgLoc, alt=imgName, height=300, width=300)
+  - }
