@@ -1,7 +1,7 @@
-# f23wb93wormington
+# s23db93wormington
 
 Lab & Assignment 10
 
-[Render Server](https://f23wb93wormington.onrender.com/)
+[Render Server](https://s23db93wormington.onrender.com)
 
 M - Microphones: name(string), cost(number), easyUse(string(yes or no))
