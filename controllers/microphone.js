@@ -1,8 +1,15 @@
 var Microphone = require('../models/microphone');
 
 // List of all Microphones
-exports.microphone_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Microphone list');
+exports.microphone_list = async function(req, res) {
+    try {
+        theMicrophones = await Microphone.find();
+        res.send(theMicrophones);
+    }
+    catch(err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 };
 
 // Specific costume
