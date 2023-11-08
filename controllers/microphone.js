@@ -31,3 +31,16 @@ exports.microphone_delete = function(req, res) {
 exports.microphone_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Microphone uptade PUT ' + req.params.id);
 };
+
+// VIEWS
+// Handle a show all view
+exports.microphone_view_all_Page = async function(req, res) {
+    try{
+    theMicrophones = await Microphone.find();
+    res.render('microphone', { title: 'Microphone Search Results', results: theMicrophones });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };

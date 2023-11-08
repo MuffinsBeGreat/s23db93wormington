@@ -4,12 +4,12 @@ block content
   h1= title
   p Welcome to #{title} or Lab10
 
-  - var results = [{name: "TurtleBeach", cost: 99.99, easyUse: "Yes"}]
+  - var items = results
   
   div(class=container-fluid)
   div(class=row)
   
-  each item in results
-    div(class=col-sm-2) Item: #{item.name}
+  each item in items
+    div(class=col-sm-2) Item: #{item.microphone_name}
     div(class=col-sm-2) Cost: #{item.cost}
-    div(class=col-sm-2) Easy Use: #{item.easyUse}
+    div(class=col-sm-2) Easy Use: #{item.easyToUse}
