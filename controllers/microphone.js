@@ -54,8 +54,26 @@ exports.microphone_delete = function(req, res) {
 };
 
 // Handle Microphone update form on PUT
-exports.microphone_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: Microphone uptade PUT ' + req.params.id);
+exports.microphone_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Microphone.findById(req.params.id)
+
+        // updates of property
+        if(req.body.microphone_name)
+            toUpdate.microphone_name = req.body.microphone_name
+        if(req.body.cost)
+            toUpdate.cost = req.body.cost
+        if(req.body.easyToUse)
+            toUpdate.easyToUse = req.body.easyToUse
+        let result = await toUpdate.save()
+        console.log("Success " + result)
+        res.send(result)
+    }
+    catch(err) {
+        res.status(500)
+        res.send(`{"Error": ${err}: Update for id ${req.params.id} failed.}`)
+    }
 };
 
 // VIEWS
