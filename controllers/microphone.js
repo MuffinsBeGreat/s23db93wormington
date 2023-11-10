@@ -13,8 +13,16 @@ exports.microphone_list = async function(req, res) {
 };
 
 // Specific costume
-exports.microphone_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Microphone detail: ' + req.params.id);
+exports.microphone_detail = async function(req, res) {
+    console.log("detail " + req.params.id);
+    try {
+        result = await Microphone.findById(req.params.id);
+        res.send(result);
+    }
+    catch(err) {
+        res.status(500);
+        res.send(`{"Error": document id for id ${req.params.id} not found}`);
+    }
 };
 
 // Handle microphone create on post
