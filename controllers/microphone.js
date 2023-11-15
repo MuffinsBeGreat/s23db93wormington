@@ -49,8 +49,17 @@ exports.microphone_create_post = async function(req, res) {
 };
 
 // Handle Microphone delete form on DELETE
-exports.microphone_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Microphone delete DELETE ' + req.params.id);
+exports.microphone_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Microphone.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    }
+    catch(err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`)
+    }
 };
 
 // Handle Microphone update form on PUT
@@ -80,11 +89,25 @@ exports.microphone_update_put = async function(req, res) {
 // Handle a show all view
 exports.microphone_view_all_Page = async function(req, res) {
     try{
-    theMicrophones = await Microphone.find();
-    res.render('microphone', { title: 'Microphone Search Results', results: theMicrophones });
+        theMicrophones = await Microphone.find();
+        res.render('microphone', { title: 'Microphone Search Results', results: theMicrophones });
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-    };
+};
+
+// Handle showing one view by query
+exports.microphone_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.params.id)
+    try {
+        result = await Microphone.findById(req.query.id)
+        res.render('microphonedetail',
+            {title: 'Microphone Detail', toShow: result});
+    }
+    catch(err) {
+        res.status(500)
+        res.send(`{"error": ${err}}`);
+    }
+};
