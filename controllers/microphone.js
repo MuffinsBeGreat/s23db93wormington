@@ -138,3 +138,15 @@ exports.microphone_update_Page = async function(req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+exports.microphone_delete_Page = async function(req, res) {
+    console.log("delete view for id " + req.query.id)
+    try {
+        result = await Microphone.findById(req.query.id);
+        res.render('microphonedelete', {title: 'Microphone Delete', toShow: result});
+    }
+    catch(err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};

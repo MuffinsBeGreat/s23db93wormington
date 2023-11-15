@@ -1,0 +1,52 @@
+extends layout
+block content
+    h1=title
+    if (toShow == null)
+        h2 No instance to delete
+    else
+    - let microphoneid = toShow._id
+    - let microphone_name = toShow.microphone_name
+    - let microphonecost = toShow.cost
+    - let microphoneeasytouse = toShow.easyToUse
+    - let actionid = "/resource/microphones/" + microphoneid
+    script let actionid = "#{actionid}" 
+    div 
+        div.row
+            div(class='microphoneAttr mr-3') Microphone ID is: 
+            div #{microphoneid}
+        div.row
+            div(class='microphoneAttr mr-3') Microphone Name is: 
+            div #{microphone_name}
+        div.row
+            div(class='microphoneAttr mr-3') Microphone Cost is: 
+            div #{microphonecost}
+        div.row
+            div(class='microphoneAttr mr-3') Microphone Easy Use is: 
+            div #{microphoneeasytouse} 
+
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+        function cancel() {
+            // Go back to the home page for the Microphone collection
+            window.location.href='/microphone'
+        }
+
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+                method: 'DELETE' // Don't need a body for the delete
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/microphone'
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        }
