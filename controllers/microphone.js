@@ -111,3 +111,18 @@ exports.microphone_view_one_Page = async function(req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+// Handle creating new instance of collection
+// No body, no in path parameter, no query
+// Does not need to be async
+exports.microphone_create_Page = function(req, res) {
+    console.log("create view")
+    try {
+        res.render('microphonecreate', {title: 'Microphone Create'});
+    }
+    catch(err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+
+    }
+};
