@@ -126,3 +126,15 @@ exports.microphone_create_Page = function(req, res) {
 
     }
 };
+
+exports.microphone_update_Page = async function(req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
+        let result = await Microphone.findById(req.query.id)
+        res.render('microphoneupdate', {title: 'Microphone Update', toShow: result});
+    }    
+    catch(err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
