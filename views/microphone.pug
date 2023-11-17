@@ -10,6 +10,13 @@ block content
   div(class=row)
   
   each item in items
+    - let destination = `dispatch(\"/microphone/update?id=${item._id}\")`
     div(class=col-sm-2) Item: #{item.microphone_name}
     div(class=col-sm-2) Cost: #{item.cost}
     div(class=col-sm-2) Easy Use: #{item.easyToUse}
+    button.btn(class="btn-primary ml-1", onclick=destination) Update
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
