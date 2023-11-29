@@ -4,6 +4,7 @@ block content
   h1= title
   p Welcome to #{title} or Lab10
 
+  button.btn(class="btn-primary ml-1", onclick=`dispatch(\"/microphone/create")`) Create
   - var items = results
   
   div(class=container-fluid)
@@ -11,10 +12,14 @@ block content
   
   each item in items
     - let destination = `dispatch(\"/microphone/update?id=${item._id}\")`
+    - let detailView = `dispatch(\"/microphone/detail?id=${item._id}\")`
+    - let deleteView = `dispatch(\"/microphone/delete?id=${item._id}\")`
     div(class=col-sm-2) Item: #{item.microphone_name}
     div(class=col-sm-2) Cost: #{item.cost}
     div(class=col-sm-2) Easy Use: #{item.easyToUse}
     button.btn(class="btn-primary ml-1", onclick=destination) Update
+    button.btn(class="btn-primary ml-1", onclick=detailView) Details
+    button.btn(class="btn-primary ml-1", onclick=deleteView) Delete
 
   script.
     function dispatch(path){
